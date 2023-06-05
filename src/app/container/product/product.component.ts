@@ -6,6 +6,7 @@ import { StoreService } from 'src/app/service/store/store.service';
 
 
 const ROWS_HEIGHT: { [id:number]: number } = {1: 400, 3: 335, 4: 350}
+const UserId = localStorage.getItem('UserId')
 
 @Component({
   selector: 'app-product',
@@ -14,6 +15,8 @@ const ROWS_HEIGHT: { [id:number]: number } = {1: 400, 3: 335, 4: 350}
 })
 export class ProductComponent implements OnInit, OnDestroy {
   @Input() item: Product = {id: 0, description: "", name: "", user_id: 0, price: 0, image:"", inventory: 0, public: false, created_at: ""}
+
+
 
   cols = 3
   category: string | undefined
@@ -38,6 +41,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.products = _products
     })
   }
+
 
   onColumnsCountChange(colsNumber: number): void {
     this.cols = colsNumber 

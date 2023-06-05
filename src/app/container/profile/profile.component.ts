@@ -50,7 +50,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/service/user/user.service';
 import { User } from 'src/app/model/user';
-import { Observer } from 'rxjs';
+import { Observer, Subscription } from 'rxjs';
+import { StoreService } from 'src/app/service/store/store.service';
+import { Product } from 'src/app/model/product';
+
+const ROWS_HEIGHT: { [id:number]: number } = {1: 400, 3: 335, 4: 350}
 
 @Component({
   selector: 'app-profile',
@@ -59,11 +63,22 @@ import { Observer } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   user: User = {username: '', email: '', adresse: '', phone_number: '', id: 0};
+  userProducts: Product[] = []
+
+  cols = 3
+  category: string | undefined
+  rowHeight = ROWS_HEIGHT[this.cols]
+  products: Array<Product> | undefined
+  sort = 'desc'
+  // le count donne le nombre d'item à afficher par page
+  count = '36'
+  productsSubscription: Subscription | undefined
 
   constructor(
     private route: ActivatedRoute, 
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private storeService: StoreService
     ) { }
 
   ngOnInit(): void {
@@ -72,6 +87,7 @@ export class ProfileComponent implements OnInit {
     if (userId) {
       const id = Number(userId);
       this.getUser(id);
+      this.getProductsByUserId(id)
     } else {
       console.log('WOW');
     }
@@ -113,6 +129,13 @@ export class ProfileComponent implements OnInit {
 
   RedirectToModifyUser() {
     this.router.navigate(['/updateUser']);
+  }
+
+  getProductsByUserId(userId: number): void {
+    this.productsSubscription = this.storeService.getAllProduct(this.count, this.sort, this.category).subscribe((_products) => {
+      // Filtrer les produits en fonction de user_id
+      this.userProducts = _products.filter(product => product.user_id === userId);
+    });
   }
 
   

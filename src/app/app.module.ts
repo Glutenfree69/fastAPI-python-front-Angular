@@ -29,8 +29,8 @@ import { ProductComponent } from './container/product/product.component';
 import { ProductContainerComponent } from './container/product-container/product-container.component';
 import { ProfileComponent } from './container/profile/profile.component';
 import { JwtInterceptor } from './common/jwt.interceptor';
-import { AddFormComponent } from './container/profile/adresse-form/add-form/add-form.component';
-import { EditFormComponent } from './container/profile/adresse-form/edit-form/edit-form.component';
+import { AddFormComponent } from './container/profile/user-form/add-form-useless/add-form.component';
+import { EditFormComponent } from './container/profile/user-form/edit-form/edit-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductFiltersComponent } from './container/product-filters/product-filters.component';
 import { ProductBoxComponent } from './container/product-box/product-box.component';
@@ -39,6 +39,8 @@ import { CartService } from './service/cart/cart.service';
 import { StoreService } from './service/store/store.service';
 import { CheckoutDialogComponent } from './container/checkout-dialog/checkout-dialog.component';
 import { FooterComponent } from './container/footer/footer.component';
+import { AddProductComponent } from './container/add-product/add-product.component';
+import { ProductBoxUpdateComponent } from './container/product-box-update/product-box-update.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { FooterComponent } from './container/footer/footer.component';
     ProductBoxComponent,
     CartComponent,
     CheckoutDialogComponent,
-    FooterComponent
+    FooterComponent,
+    AddProductComponent,
+    ProductBoxUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 <mat-card class="max-w-7xl mx-auto border-x min-h-full">
   <div class="container" style="padding: 5%;">
+
+    <h2 class="text-center mt-1">User Details</h2>
     <div class="row justify-content-md-center">
   
       <div class="col-4" *ngIf="user">
@@ -36,6 +38,26 @@
           <button class="btn btn-danger" (click)="delete(user.id)">Supprimer</button>
         </div>
       </div>
+
+      <div class="border-top my-4 mt-5">
+        <h2 class="text-center mt-5">Products published</h2>
+          <mat-grid-list
+            gutterSize="16"
+            [cols]="cols"
+            [rowHeight]="rowHeight"
+          >
+              <mat-grid-tile *ngFor="let product of userProducts">
+                  <app-product-box-update
+                    [product]="product"
+                    
+                    class="w-full" 
+                    [fullWidthMode]="cols === 1"
+                  >
+                  </app-product-box-update>
+              </mat-grid-tile>
+          </mat-grid-list>
+      </div>
+      
   
       <div *ngIf="!user">
         <p>Loading...</p>
