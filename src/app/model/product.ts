@@ -9,3 +9,12 @@ export interface Product {
     public: boolean,
     created_at: string
 }
+
+export interface updatedProduct {
+    name: string,
+    price: number,
+    description: string,
+    inventory: number,
+    image: string,
+    id: number
+}

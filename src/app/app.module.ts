@@ -41,6 +41,7 @@ import { CheckoutDialogComponent } from './container/checkout-dialog/checkout-di
 import { FooterComponent } from './container/footer/footer.component';
 import { AddProductComponent } from './container/add-product/add-product.component';
 import { ProductBoxUpdateComponent } from './container/product-box-update/product-box-update.component';
+import { ProductUpdateFormComponent } from './container/product-box-update/product-update-form/product-update-form/product-update-form.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ProductBoxUpdateComponent } from './container/product-box-update/produc
     CheckoutDialogComponent,
     FooterComponent,
     AddProductComponent,
-    ProductBoxUpdateComponent
+    ProductBoxUpdateComponent,
+    ProductUpdateFormComponent
   ],
   imports: [
     BrowserModule,

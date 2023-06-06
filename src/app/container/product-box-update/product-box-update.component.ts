@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
+import { ProductService } from 'src/app/service/product/product-service.service';
 
 @Component({
   selector: 'app-product-box-update',
@@ -14,6 +16,8 @@ export class ProductBoxUpdateComponent {
   showFullDescription = false
   showFullName = false
 
+  constructor( private productService: ProductService, private router: Router) {}
+
   @Input() fullWidthMode = false
 
   @Input() product: Product | undefined
@@ -25,7 +29,13 @@ export class ProductBoxUpdateComponent {
   }
 
 
-  onEditProduct() {
-    
+  RedirectToUpdate() {
+
+    const productId = this.product?.id
+    const ProductId: number = productId ?? 0
+    localStorage.setItem('ProductId', ProductId.toString())
+
+    this.router.navigate(['/updatePost'])
   }
 }
+

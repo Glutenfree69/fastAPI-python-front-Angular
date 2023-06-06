@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './container/add-product/add-product.component';
 import { CartComponent } from './container/cart/cart.component';
@@ -9,6 +9,7 @@ import { AddFormComponent } from './container/profile/user-form/add-form-useless
 import { EditFormComponent } from './container/profile/user-form/edit-form/edit-form.component';
 import { ProfileComponent } from './container/profile/profile.component';
 import { RegisterComponent } from './container/register/register.component';
+import { ProductUpdateFormComponent } from './container/product-box-update/product-update-form/product-update-form/product-update-form.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'products', pathMatch: 'full'},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'routeAcreer', component: AddFormComponent},
   {path: 'updateUser', component: EditFormComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'add', component: AddProductComponent}
+  {path: 'add', component: AddProductComponent},
+  {path: 'updatePost', component: ProductUpdateFormComponent}
 ];
 
 @NgModule({
