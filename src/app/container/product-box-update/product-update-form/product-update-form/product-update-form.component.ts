@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Product, updatedProduct } from 'src/app/model/product';
 import { ProductService } from 'src/app/service/product/product-service.service';
@@ -14,7 +15,9 @@ export class ProductUpdateFormComponent implements OnInit {
 
   constructor( 
     private http: HttpClient,
-    private productService: ProductService
+    private productService: ProductService,
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +63,8 @@ export class ProductUpdateFormComponent implements OnInit {
         next: response => {
           console.log('Product updated successfully:', response);
           // Traitez la réponse de la mise à jour du produit
+          this._snackBar.open('Product updated', 'Ok', { duration: 3000 })
+          this.router.navigate(['/profile'])
         },
         error: error => {
           console.error('Error updating product:', error);

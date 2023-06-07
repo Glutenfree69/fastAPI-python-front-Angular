@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
 import { ProductService } from 'src/app/service/product/product-service.service';
@@ -17,7 +18,7 @@ export class ProductBoxUpdateComponent {
   showFullDescription = false
   showFullName = false
 
-  constructor( private http: HttpClient, private router: Router) {}
+  constructor( private http: HttpClient, private router: Router, private _snackBar: MatSnackBar) {}
 
   @Input() fullWidthMode = false
 
@@ -54,7 +55,9 @@ export class ProductBoxUpdateComponent {
       this.http.delete(`http://127.0.0.1:8000/posts/${id}`, { headers }).subscribe({
         next: () => {
           console.log('Product deleted successfully');
+          this._snackBar.open('Product deleted', 'Ok', { duration: 3000 })
           // Traitez la réponse de suppression du produit
+          window.location.reload(); // Actualiser la page
         },
         error: error => {
           console.error('Error deleting product:', error);

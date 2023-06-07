@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
 
 @Component({
@@ -21,7 +23,9 @@ export class AddProductComponent {
 }
 
 constructor(
-  private http: HttpClient
+  private http: HttpClient,
+  private router: Router,
+  private _snackBar: MatSnackBar
   ) {}
 
   addProduct() {
@@ -36,6 +40,8 @@ constructor(
             // Réponse du backend en cas de succès
             console.log(response);
             // Réinitialiser le formulaire ou effectuer d'autres actions
+            this._snackBar.open('New post created', 'Ok', { duration: 3000 })
+            this.router.navigate(['/profile'])
           },
           error: error => {
             // Gérer les erreurs en cas d'échec de la requête
