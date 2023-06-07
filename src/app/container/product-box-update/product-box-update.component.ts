@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
@@ -16,7 +17,7 @@ export class ProductBoxUpdateComponent {
   showFullDescription = false
   showFullName = false
 
-  constructor( private productService: ProductService, private router: Router) {}
+  constructor( private http: HttpClient, private router: Router) {}
 
   @Input() fullWidthMode = false
 
@@ -37,5 +38,36 @@ export class ProductBoxUpdateComponent {
 
     this.router.navigate(['/updatePost'])
   }
+
+
+  onDeleteProduct() {
+    const productId = this.product?.id
+    const token = localStorage.getItem('UserToken');
+  
+    if (productId !== undefined && token !== undefined) {
+      const id = typeof productId === 'number' ? productId : parseInt(productId, 10);
+  
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+  
+      this.http.delete(`http://127.0.0.1:8000/posts/${id}`, { headers }).subscribe({
+        next: () => {
+          console.log('Product deleted successfully');
+          // Traitez la réponse de suppression du produit
+        },
+        error: error => {
+          console.error('Error deleting product:', error);
+          // Gérez les erreurs de suppression du produit
+        },
+        complete: () => {
+          console.log('Product deletion complete');
+        }
+      });
+    } else {
+      console.log('ProductId or UserToken is null');
+    }
+  }
+
 }
 

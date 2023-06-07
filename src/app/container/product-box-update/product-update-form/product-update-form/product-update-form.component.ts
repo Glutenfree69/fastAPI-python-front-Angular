@@ -56,7 +56,6 @@ export class ProductUpdateFormComponent implements OnInit {
         'Authorization': `Bearer ${token}`
       });
   
-      // this.http.post('http://127.0.0.1:8000/posts', this.product, { headers })
       this.http.put(`http://127.0.0.1:8000/posts/${id}`, updatedPost, { headers }).subscribe({
         next: response => {
           console.log('Product updated successfully:', response);
